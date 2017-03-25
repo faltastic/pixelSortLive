@@ -2,7 +2,7 @@
 
  Pixel sorting on a collection of photo sets for live performances
  
-(https://raw.githubusercontent.com/faltastic/pixelSortLive/master/screenshots/main.jpg)
+![alt](https://raw.githubusercontent.com/faltastic/pixelSortLive/master/screenshots/main.jpg)
 
  ### What is this?
 This sketch performs pixel sorting on a collection of photo sets. It was built to be used in live performances.
@@ -26,6 +26,8 @@ Each photo set may contain **jpg** photos of any size but they must be named *po
 That's it!
 
 ## Controls
+
+![alt](https://raw.githubusercontent.com/faltastic/pixelSortLive/master/screenshots/gui.jpg)
 
 
 ## License
