@@ -12,7 +12,7 @@
  * https://github.com/phillipdavidstearns/aYearInCode/blob/master/Processing%202.2.1/cellSort/cellSort.pde
  *
  * by Youssef Faltas, 2017
- * https://github.com/faltastic/cellsortGUI
+ * https://github.com/faltastic/pixelSortLive
  *
  */
 
@@ -22,7 +22,7 @@
 // the data folder and add their names here
 
 String[] photoSets = {
- "egypt", "desert" // more albums here
+ "cosmos", "desert" // more albums here
 };
 
 // Each photo set may contain jpg photos of any size but they are 
