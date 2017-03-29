@@ -105,7 +105,7 @@ public class ControlFrame extends PApplet {
 
     cp5.addSlider("flipTime")
       .plugTo(parent, "flipSpeed")
-        .setRange(2, 100)
+        .setRange(2, 200)
           .setValue(30)
             .setPosition(20, 460)
               .setSize(w-100, 20)
@@ -144,8 +144,7 @@ public class ControlFrame extends PApplet {
     }
   }
 
-  public void reload() {
-    loadSrcs(); 
+  public void reload() { 
     loadSource();
   }
   public void nextImage() {

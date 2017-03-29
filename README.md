@@ -35,7 +35,7 @@ That's it!
 
 Let's go through what the control window let's you do:
 
-* Play = play/pause
+* Play = starts and stops the pixel sorting 
 * Reload = restart the sorting on the current image
 * Wrap = toggle wrapping pixels on image edges on/off (default: on)
 

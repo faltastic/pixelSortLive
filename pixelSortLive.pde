@@ -25,6 +25,7 @@ String[] photoSets = {
  "cosmos", "desert" // more albums here
 };
 
+
 // Each photo set may contain jpg photos of any size but they are 
 // to be named "poly0.jpg", "poly1.jpg", "poly2.jpg", and so on.
 
@@ -80,9 +81,9 @@ void setup() {
   selectSet(0);
   loadSrcs();
   loadSource();
-
+ imageMode(CENTER);
   background(0);
-  image(source, ( width-output.width)/2, 0);
+  image(source,width/2,height/2);
 }
 
 void draw() {
@@ -97,7 +98,7 @@ void draw() {
     output = cellSort(source);
     output.updatePixels();
     background(0);
-    image(output, ( width-output.width)/2, 0);
+    image(output, width/2,height/2);
 
     if (printFrame) {
       println("printing");
@@ -130,14 +131,21 @@ void loadSrcs() {
 
 void loadSource() {
   loaded=false;
+  polySrc[nImg] = loadImage(photoSets[nSet]+"/poly"+nImg+".jpg");
   source = polySrc[nImg];
-  source.resize(width, 0);
+  
+  if(source.height > source.width){
+    source.resize(0,height); // portrait
+  }
+  else{
+    source.resize(width,0); // landscape
+  }
   output = source;
   imageMode(CENTER);
   background(0);
   image(source,width/2,height/2);
   //image(source, (width-source.width)/2, (height-source.height)/2);
-  imageMode(CORNER);
+  //imageMode(CORNER);
   loaded = true;
 }
 
