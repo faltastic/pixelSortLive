@@ -1,5 +1,6 @@
 
 
+
 // using Phillip Davis Stearns' cell sort sketch at
 
 // https://github.com/phillipdavidstearns/aYearInCode/blob/master/Processing%202.2.1/cellSort/cellSort.pde
@@ -13,6 +14,7 @@ int[] swapPixels(int[] _pixelArray, int _index1, int _index2) {
 }
 
 PImage cellSort(PImage _image) {
+  _image.loadPixels();
   int swap_x = 0;
   int swap_y = 0;
   int neighbor_x = 0;
@@ -24,7 +26,7 @@ PImage cellSort(PImage _image) {
       swap_y = y;
       for (int ny = 0; ny < 3; ny++ ) {
         for (int nx = 0; nx < 3; nx++) {
-          if (rules[nx][ny] /*&& (nx != 1 && ny != 1)*/) {
+          if (rules[ny][nx] /*&& (nx != 1 && ny != 1)*/) {
             if (!wrap) {
               neighbor_x = x + (nx-1);
               neighbor_y = y + (ny-1);
@@ -82,6 +84,7 @@ PImage cellSort(PImage _image) {
       }
     }
   }
+  _image.updatePixels();
   return _image;
 }
 
@@ -107,3 +110,4 @@ boolean coordinateInBounds(PImage _image, int x, int y) {
 boolean pixelWithinWindow(PImage _image, int x, int y, int lower, int higher) {
   return _image.pixels[y*_image.width+x] < color(lower) && _image.pixels[y*_image.width+x] > color(higher);
 }
+

@@ -37,22 +37,22 @@ Let's go through what the control window let's you do:
 
 * Play = starts and stops the pixel sorting 
 * Reload = restart the sorting on the current image
-* Wrap = toggle wrapping pixels on image edges on/off (default: on)
-
-
-* Sort Matrix = the direction in which the sorting is to be done
-* Mode = choose between 6 sorting algorithims 
- 
-
-* Range = lower and upper brightness thersholds of which pixels to be sorted
-* Sort Flip = flip the sorting thersholds 
-
-
-* Frate = speed control, it really changes the sketch's framerate
-
 
 * No Flip = toggle flipping image in the photoset (default: on)
 * Next Image = load next image in the photoset 
+
+
+* Sort Flip = flip the sorting thersholds 
+* Wrap = toggle wrapping pixels on image edges on/off (default: on)
+
+* Mode = choose between 6 sorting algorithims 
+* Sort Matrix = the direction in which the sorting is to be done
+
+
+* Range = lower and upper brightness thersholds of which pixels to be sorted
+
+
+* Frate = speed control, it really changes the sketch's framerate
 * Flip Time = set how long it takes between image flips, the higher the value the slower the flip
 
 * Albums = load another album

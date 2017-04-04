@@ -1,3 +1,5 @@
+
+
 /**
  *   Pixel sorting for photo sets  
  *   + a GUI extra window 
@@ -14,7 +16,7 @@
  * by Youssef Faltas, 2017
  * https://github.com/faltastic/pixelSortLive
  *
- */
+**/
 
 ////////////////////////////////////////////////////////////////
 // 
@@ -22,9 +24,10 @@
 // the data folder and add their names here
 
 String[] photoSets = {
- "cosmos", "desert" // more albums here
+  "cosmos",
+ "desert" 
+ // more albums here
 };
-
 
 // Each photo set may contain jpg photos of any size but they are 
 // to be named "poly0.jpg", "poly1.jpg", "poly2.jpg", and so on.
@@ -51,7 +54,7 @@ int type = 1;
 int offset_x = 0;
 int offset_y = 0;
 int eval_mode = 0;
-int mode = 0; //sets the threshold evaluation mode
+int mode = 2; //sets the threshold evaluation mode
 boolean[][] rules;
 int logic = 0;
 int printFNum =0;
@@ -73,8 +76,6 @@ boolean pauseFlip = false;
 void setup() {
 
   size(1080, 720);
-  // alternative setup
-  // size(source.width, source.height);
   
   cf = addControlFrame("Sort Control", 200, 650);
   setRules();
@@ -94,15 +95,16 @@ void draw() {
       loadSource();
     }
     
-    source.loadPixels();
+    
     output = cellSort(source);
-    output.updatePixels();
+    
     background(0);
     image(output, width/2,height/2);
 
     if (printFrame) {
       println("printing");
-      saveFrame("Prints/s"+printFNum +".tif");
+      saveFrame("frame-######.tif");
+      //saveFrame("Prints/s"+printFNum +".tif");
       printFNum++;
     }
   }
@@ -124,9 +126,11 @@ void selectSet(int nSet) {
 void loadSrcs() {
   loaded=false;
   polySrc = new PImage[totalImg];
+  /* unneccesary and changing album is must faster now
   for (int i=0; i<totalImg; i++) {
-    polySrc[i] = loadImage(photoSets[nSet]+"/poly"+i+".jpg");
+     polySrc[i] = loadImage(photoSets[nSet]+"/poly"+i+".jpg");
   }
+  */
 }
 
 void loadSource() {

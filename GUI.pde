@@ -31,23 +31,64 @@ public class ControlFrame extends PApplet {
     background(0);
     List l = java.util.Arrays.asList(photoSets);
     cp5 = new ControlP5(this);
-
-    cp5.addBang("reload")
-      .setLabel("REload").setPosition(20, 60).setSize(40, 20);
-
+    
+    int y=0;
+    y+=20;
+    
     cp5.addToggle("PLAY")
       .plugTo(parent, "play")
-        .setPosition(20, 20).setSize(w-40, 20);
+        .setPosition(20, y).setSize(w/2 -25, 20);
+    
+    cp5.addBang("reload")
+      .setLabel("REload").setPosition(w/2, y).setSize(w/2-25, 20);
+    
+    
+    y+=50;
 
+    cp5.addToggle("PauseFlip")
+      .plugTo(parent, "pauseFlip")
+        .setLabel("No Flip")
+           .setPosition(20, y).setSize(40, 20); 
+    cp5.addBang("nextImage")
+      .setLabel("next image")
+        .setPosition(w/2, y)
+          .setSize(w/2-25, 20);
+          
+    
+    
+    y+=50;
+    
     cp5.addToggle("Wrap")
       .plugTo(parent, "wrap")
         .setState(true)
-          .setPosition(w/2, 60).setSize(40, 20);
+          .setPosition(w/2, y).setSize(w/3, 20);
+    cp5.addToggle("Sort Flip")
+      .plugTo(parent, "logic")
+        .setPosition(20, y).setSize(w/3, 20)
+          .setMode(ControlP5.SWITCH);      
+          
+    
+    
+    y+=60;
+    text("Mode", 20, y);
+    y+=10;
+    cp5.addRadioButton("changeMode")
+      .setPosition(20, y).setSize(30, 20)
+        .setColorLabel(color(255))
+          .setItemsPerRow(3)
+            .setSpacingColumn(30)
 
-    text("Sort Matrix", 20, 120);
+              .addItem("A", 0).addItem("B", 1).addItem("C", 2)
+                .addItem("D", 3).addItem("E", 4).addItem("F", 5)
+                  .activate(2)
+                    ;
+    y+=60;
+    
+    text("Sort Matrix", 20, y);
+    y+=10;
     cp5.addCheckBox("sortMatrix")
       .setLabel("mode")
-        .setPosition(20, 130).setSize(40, 20)
+        .setPosition(20, y).setSize(40, 20)
           .setColorLabel(color(255))
             .setItemsPerRow(3)
               .setSpacingColumn(10)
@@ -56,66 +97,44 @@ public class ControlFrame extends PApplet {
                   .addItem("4", 0).addItem("5", 0).addItem("6", 0)
                     .addItem("7", 0).addItem("8", 0).addItem("9", 0)
                       ;
-
-    text("Mode", 20, 220);
-    cp5.addRadioButton("changeMode")
-      .setPosition(20, 230).setSize(15, 15)
-        .setColorLabel(color(255))
-          .setItemsPerRow(6)
-            .setSpacingColumn(15)
-
-              .addItem("A", 0).addItem("B", 1).addItem("C", 2)
-                .addItem("D", 3).addItem("E", 4).addItem("F", 5)
-                  .activate(2)
-                    ;
-
+    y+=90;
+    
     cp5.addRange("range")
       .setBroadcast(false) 
-        .setPosition(20, 270)
+        .setPosition(20, y)
           .setSize(w-60, 20)
             .setHandleSize(10)
               .setRange(0, 255)
-                .setRangeValues(50, 100)
+                .setRangeValues(20, 150)
                   .setBroadcast(true)
                     ;
-
-    cp5.addToggle("Sort Flip")
-      .plugTo(parent, "logic")
-        .setPosition(20, 300).setSize(60, 20)
-          .setMode(ControlP5.SWITCH);
-
+    
+    
+    y+=50;
     cp5.addSlider("FRate")
       .plugTo(parent, "frameRate")
         .setRange(0.5, 40)
           .setValue(25)
-            .setPosition(20, 360)
+            .setPosition(20, y)
               .setSize(w-60, 20)
                 ;
 
-    cp5.addBang("nextImage")
-      .setLabel("next image")
-        .setPosition(w/2, 410)
-          .setSize(w/3, 20);
-
-    cp5.addToggle("PauseFlip")
-      .plugTo(parent, "pauseFlip")
-        .setLabel("No Flip")
-          .setPosition(20, 410).setSize(w/3, 20);
-
-
+    y+=30;
     cp5.addSlider("flipTime")
       .plugTo(parent, "flipSpeed")
         .setRange(2, 200)
           .setValue(30)
-            .setPosition(20, 460)
-              .setSize(w-100, 20)
-                ;   
+            .setPosition(20, y)
+              .setSize(w/2, 20)
+                ; 
+    
+    
 
-
+   y+=60;
     Group g3 = cp5.addGroup("g3")
       .setLabel("Albums")
-        .setPosition(20, 520)
-          .setSize(160, 100)
+        .setPosition(20, y)
+          .setSize(w-40, 100)
             .setBackgroundColor(color(50))
               ;
 
