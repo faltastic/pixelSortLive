@@ -38,15 +38,22 @@ Let's go through what the control window let's you do:
 * Play = starts and stops the pixel sorting 
 * Reload = restart the sorting on the current image
 
+
+* Back/Next Image = goes back or forwards one image 
 * No Flip = toggle flipping image in the photoset (default: on)
-* Next Image = load next image in the photoset 
+
+
+* Random Mode/Matrix = set a new random mode or matrix on the next image
+* Sort speed = speed up the sorting effect by skipping 1-5 pixels 
 
 
 * Sort Flip = flip the sorting thersholds 
 * Wrap = toggle wrapping pixels on image edges on/off (default: on)
 
+
 * Mode = choose between 6 sorting algorithims 
 * Sort Matrix = the direction in which the sorting is to be done
+* CLR = zeroes the current matrix
 
 
 * Range = lower and upper brightness thersholds of which pixels to be sorted
@@ -54,6 +61,12 @@ Let's go through what the control window let's you do:
 
 * Frate = speed control, it really changes the sketch's framerate
 * Flip Time = set how long it takes between image flips, the higher the value the slower the flip
+
+* Overlay = set the hue and transparency of an overlay layer
+
+
+* Shot = Take a screenshot of the display window and save it in TIFF format
+
 
 * Albums = load another album
 
@@ -65,8 +78,6 @@ You can control the size of the display window in the first line in the setup() 
  size(1080, 720);
 ```
 
-If you want to print out the frames of your animation, press **P** while playing, and the files will be saved in a **prints** folder in *tif* format.
-
 
 ## Thanks
 
@@ -74,7 +85,7 @@ To [Kareem Osman](https://vimeo.com/kafkube) for the help testing this code in t
 
 ## License
 
-MIT 2017
+MIT 2018
 
 Basically, you can do whatever you want as long as you include the original copyright and license notice in any copy of the software/source. 
 

@@ -33,30 +33,56 @@ public class ControlFrame extends PApplet {
     cp5 = new ControlP5(this);
     
     int y=0;
-    y+=20;
+    y+=10;
     
     cp5.addToggle("PLAY")
       .plugTo(parent, "play")
-        .setPosition(20, y).setSize(w/2 -25, 20);
+        .setPosition(20, y).setSize( (w-60)/2, 20);
     
     cp5.addBang("reload")
-      .setLabel("REload").setPosition(w/2, y).setSize(w/2-25, 20);
+      .setLabel("REload").setPosition((w-60)/2 + 40, y).setSize(( w-60)/2, 20);
     
     
-    y+=50;
+    y+=40;
+    
+    cp5.addBang("backImage")
+      .setLabel("back")
+        .setPosition(20, y)
+          .setSize(w/4, 20);
+          
+     cp5.addBang("nextImage")
+      .setLabel("next image")
+        .setPosition(40+w/4, y)
+          .setSize(3*w/4-60 , 20);
+          
+    y+=40;
 
     cp5.addToggle("PauseFlip")
       .plugTo(parent, "pauseFlip")
         .setLabel("No Flip")
            .setPosition(20, y).setSize(40, 20); 
-    cp5.addBang("nextImage")
-      .setLabel("next image")
-        .setPosition(w/2, y)
-          .setSize(w/2-25, 20);
-          
     
+    cp5.addToggle("randomMode")
+      .plugTo(parent, "randomMode")
+        .setLabel("rnd mode")
+           .setPosition(80, y).setSize(40, 20); 
     
-    y+=50;
+    cp5.addToggle("randomMatrix")
+      .plugTo(parent, "randomMatrix")
+        .setLabel("rnd matrix")
+           .setPosition(140, y).setSize(40, 20); 
+           
+    y+=45;      
+    cp5.addSlider("Sort Speed")
+    .plugTo(parent, "sortSpeed")
+     .setPosition(20,y)
+     .setSize(w/2,15)
+     .setRange(1,5)
+     .setValue(1)
+     .setNumberOfTickMarks(5)
+     ;        
+
+    y+=35;
     
     cp5.addToggle("Wrap")
       .plugTo(parent, "wrap")
@@ -65,27 +91,33 @@ public class ControlFrame extends PApplet {
     cp5.addToggle("Sort Flip")
       .plugTo(parent, "logic")
         .setPosition(20, y).setSize(w/3, 20)
-          .setMode(ControlP5.SWITCH);      
+          .setMode(ControlP5.SWITCH);  
           
+   
     
-    
-    y+=60;
+    y+=50;
     text("Mode", 20, y);
     y+=10;
     cp5.addRadioButton("changeMode")
+    //.plugTo(parent, "mode")
       .setPosition(20, y).setSize(30, 20)
         .setColorLabel(color(255))
           .setItemsPerRow(3)
-            .setSpacingColumn(30)
+            .setSpacingColumn(20)
 
               .addItem("A", 0).addItem("B", 1).addItem("C", 2)
                 .addItem("D", 3).addItem("E", 4).addItem("F", 5)
                   .activate(2)
                     ;
-    y+=60;
+    y+=70;
     
     text("Sort Matrix", 20, y);
-    y+=10;
+    
+    y-=15;
+    cp5.addBang("clearMatrix")
+        .setCaptionLabel("CLR")
+           .setPosition(w-60, y).setSize(10, 10); 
+    y+=25;
     cp5.addCheckBox("sortMatrix")
       .setLabel("mode")
         .setPosition(20, y).setSize(40, 20)
@@ -97,7 +129,7 @@ public class ControlFrame extends PApplet {
                   .addItem("4", 0).addItem("5", 0).addItem("6", 0)
                     .addItem("7", 0).addItem("8", 0).addItem("9", 0)
                       ;
-    y+=90;
+    y+=80;
     
     cp5.addRange("range")
       .setBroadcast(false) 
@@ -108,9 +140,8 @@ public class ControlFrame extends PApplet {
                 .setRangeValues(20, 150)
                   .setBroadcast(true)
                     ;
-    
-    
-    y+=50;
+     
+    y+=30;
     cp5.addSlider("FRate")
       .plugTo(parent, "frameRate")
         .setRange(0.5, 40)
@@ -127,10 +158,39 @@ public class ControlFrame extends PApplet {
             .setPosition(20, y)
               .setSize(w/2, 20)
                 ; 
-    
-    
+   
+      y+=50;
+      Group g1 = cp5.addGroup("g1")
+      .setLabel("overlay")
+        .setPosition(20, y)
+          .setSize(w-40, 30)
+            .setBackgroundColor(color(100))
+              ;
+       cp5.addSlider("hue")
+      .plugTo(parent, "overlayHue")
+        .setRange(0, 255)
+          .setValue(0)
+            .setPosition(0, 10)
+              .setSize(60, 10)
+              .setGroup(g1)
+                ;  
+      cp5.addSlider("alpha")
+      .plugTo(parent, "overlayAlpha")
+        .setRange(0, 255)
+          .setValue(255)
+            .setPosition(80, 10)
+              .setSize(50, 10)
+              .setGroup(g1)
+                ;  
 
-   y+=60;
+  
+  y+=50;
+   cp5.addBang("shot")
+      .setLabel("shot")
+        .setPosition(20, y)
+        .setSize(w-40, 20);
+       
+    y+=50;
     Group g3 = cp5.addGroup("g3")
       .setLabel("Albums")
         .setPosition(20, y)
@@ -139,6 +199,7 @@ public class ControlFrame extends PApplet {
               ;
 
 
+  
     cp5.addScrollableList("albumlist")
       .setPosition(10, 10)
         .setSize(130, 80)
@@ -150,8 +211,8 @@ public class ControlFrame extends PApplet {
   }
 
 
-  public void albumlist(int n) {
 
+  public void albumlist(int n) {
     nSet =int(n);
     selectSet(nSet);
   }
@@ -162,14 +223,24 @@ public class ControlFrame extends PApplet {
       lower = ceil(theEvent.getController().getArrayValue(1));
     }
   }
-
+  
+  public void clearMatrix() { 
+    setRules();
+  }
+  
   public void reload() { 
     loadSource();
   }
+  
   public void nextImage() {
     nImg = (nImg+1)%totalImg;
-    loadSource();
+    loadSource(); 
   }
+  
+  public void backImage() {
+    nImg = (nImg-1)%totalImg;
+  }
+  
   public void sortMatrix(float[] a) {
     rules[0][0] = boolean(floor(a[0])); 
     rules[0][1] = boolean(floor(a[1])); 
@@ -184,145 +255,16 @@ public class ControlFrame extends PApplet {
   public void changeMode(int a) {
     mode = a;
   }
-  public void draw() {
+  
+  public void shot(){
+    printFrame=true;
+    println("shot");
+  }
 
+
+  public void draw() {
     // NOTHING //
   }
-
-
-  public void keyPressed() {
-    //println(keyCode);
-    // keycode ref. at http://keycodes.atjayjo.com/
-
-    // you can use the keyboard instead of the visual controls 
-    // but the changes made won't reflect on the knobs and sliders 
-    // in the control window
-
-    switch(keyCode) {
-    case 48:
-      setRules();
-      break;  
-    case 49:
-      rules[0][0] = !rules[0][0];
-      break;
-    case 50:
-      rules[0][1] = !rules[0][1];
-      break;
-    case 51:
-      rules[0][2] = !rules[0][2];
-      break;
-    case 52:
-      rules[1][0] = !rules[1][0];
-      break;
-    case 53:
-      rules[1][1] = !rules[1][1];
-      break;
-    case 54:
-      rules[1][2] = !rules[1][2];
-      break;
-    case 55:
-      rules[2][0] = !rules[2][0];
-      break;
-    case 56:
-      rules[2][1] = !rules[2][1];
-      break;
-    case 57:
-      rules[2][2] = !rules[2][2];
-      break;
-
-    case 82:
-      loadSrcs(); 
-      loadSource(); // r
-      break;
-    case 38: // up arrow
-      higher++;
-      println("low " +higher);
-      break;
-    case 40: // down arrow
-      higher--;
-      println("low " + higher);
-      break;
-    case 37: // up arrow
-      lower--;
-      println("high " +lower);
-      break;
-    case 39: // down arrow
-      lower++;
-      println("high " +lower);
-      break;
-    case 32: // space toggles animation
-      play=!play;
-      break;
-    case 87: // w toggles edge wrap mode
-      wrap=!wrap;
-      break;
-    case 65: // a toggles edge wrap mode
-      mode=0;
-      break;
-    case 66: // b toggles edge wrap mode
-      mode=1;
-      break;
-    case 67: // c toggles edge wrap mode
-      mode=2;
-      break;
-    case 68: // d toggles edge wrap mode
-      mode=3;
-      break;
-    case 69: // e toggles edge wrap mode
-      mode=4;
-      break;
-    case 70: // f toggles edge wrap mode
-      mode=5;
-      break;
-
-    case 91: // { slows down pixelsort
-      if (frameRate>1) { 
-        frameRate(frameRate -2); 
-        println("fR = "+frameRate);
-      }
-      break;
-    case 93: // } speeds up pixelsort
-      if (frameRate<60) { 
-        frameRate(frameRate +2);
-        println("fR = "+frameRate);
-      }
-      break; 
-    case 59: // ; slows down next image
-      if (flipSpeed < 160) { 
-        flipSpeed +=12; 
-        println("Flip Speed = "+flipSpeed);
-      }
-      break;
-    case 222: // ' speeds up next image 
-      if (flipSpeed > 12) { 
-        flipSpeed -=12; 
-        println("Flip Speed = "+flipSpeed);
-      }
-      break;   
-    case 78: // n loads next image
-      nImg = (nImg+1)%totalImg;
-      loadSource();
-      break;
-    case 76: // l pauses flip
-      pauseFlip =!pauseFlip;
-      break;
-    case 77: // m loads next image set
-      nSet = (nSet+1)%photoSets.length;
-      selectSet(nSet);
-      break;
-    case 80:
-      printFrame=!printFrame;
-      printFNum=0;
-      break;
-    case 44:  // ,
-      logic = 0;
-      break;
-    case 46: //.
-      logic = 1;
-      break;
-    }
-  }
-
 
 
   private ControlFrame() {
